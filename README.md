@@ -6,6 +6,16 @@ Inicialmente puede que te sangren los ojos cuando leas el texto simplificado, pe
 
 En su forma simplificada, el español sería mucho más fácil de aprender, y al leerlo su pronunciación sigue igual. Estamos en la era de la información, señores. Hagamos las cosas más simples.
 
+## Uso
+
+Para simplificar un texto anticuado al léxico del futuro:
+
+```
+$('.original').simplify();
+```
+
+Donde «.original» puede ser cualquier selector jQuery que apunte a un nodo que contenga texto.
+
 ## Demo
 http://matto.io/files/simplify/
 
