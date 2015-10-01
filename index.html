@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Demo</title>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="src/simplify.js"></script>
+    <script type="text/javascript">
+      // On load
+      $(function() {
+        $('.btn-translate').on('click', function(e) {
+          $('.original').simplify();
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <textarea rows="10" cols="50" class="original" placeholder="Input your horrible common text here...">Estamos en la era del todo conectado, el movil, el coche, la casa, hasta las farolas. Si, las farolas. Santander acaba de instalar la primera farola con 4G, un proyecto que pretende matar dos pajaros de un tiro: ahorrar energia y reducir la saturacion del trafico de banda ancha movil.
+      </textarea>
+      <br>
+      <input type="button" class="btn-translate" value="Traducir">
+      <p class="translated"></p>
+    </div>
+  </body>
+</html>
