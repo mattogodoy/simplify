@@ -27,6 +27,9 @@
           text = this.replaceAll('ci', 'zi', text);
         }
 
+        // Replace X with KS
+        text = this.replaceAll('x', 'ks', text);
+
         // Replace Ch with X
         text = this.replaceAll('ch', 'x', text);
 
