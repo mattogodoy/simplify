@@ -18,6 +18,15 @@ $('.original').simplify();
 
 Donde «.original» puede ser cualquier selector jQuery que apunte a un nodo que contenga texto.
 
+### Opciones
+
+Por defecto, se reemplaza las /c/ y /z/ por /s/.
+Para el caso de España mantenemos /z/, tanto para las sílabas ce, ci como para que comienzan por zeta. Para esto pasamos el parámetro spain con valor true.
+
+```
+$('.original').simplify({spain: true});
+```
+
 ## Demo
 http://matto.io/files/simplify/
 

@@ -1,16 +1,31 @@
 (function ($) {
- 
-  $.fn.simplify = function() {
+
+  $.fn.simplify = function (options) {
+    /*
+     In Spain we keep sound /z/.
+     */
+    var defaults = {
+      spain: false
+    };
+
+    options = $.extend(defaults, options);
+    console.log(options);
+
     var translator = {
-      translate: function(text) {
+      translate: function (text) {
         text = text.toLowerCase();
 
         // Replace V with B
         text = this.replaceAll('v', 'b', text);
 
         // Replace Ce, Ci with Se, Si
-        text = this.replaceAll('ce', 'se', text);
-        text = this.replaceAll('ci', 'si', text);
+        if (!options.spain) {
+          text = this.replaceAll('ce', 'se', text);
+          text = this.replaceAll('ci', 'si', text);
+        } else {
+          text = this.replaceAll('ce', 'ze', text);
+          text = this.replaceAll('ci', 'zi', text);
+        }
 
         // Replace Ch with X
         text = this.replaceAll('ch', 'x', text);
@@ -27,21 +42,23 @@
         text = this.replaceAll('h', '', text);
 
         // Replace Z with S
-        text = this.replaceAll('z', 's', text);
+        if (!options.spain) {
+          text = this.replaceAll('z', 's', text);
+        }
 
         return text;
       },
 
-      replaceAll: function(find, replace, str) {
+      replaceAll: function (find, replace, str) {
         return str.replace(new RegExp(find, 'g'), replace);
       }
     };
 
     var text = '';
     var property = '';
-    var translation = '';
+    var translation;
 
-    if(this.val()) {
+    if (this.val()) {
       text = this.val();
       property = 'val';
     } else if (this.text()) {
@@ -57,21 +74,21 @@
 
     translation = translator.translate(text);
 
-    switch(property) {
+    switch (property) {
       case 'val':
         this.val(translation);
         break;
-      
+
       case 'text':
         this.text(translation);
         break;
-      
+
       case 'html':
         this.html(translation);
         break;
     }
-    
+
     return this;
   };
- 
+
 }(jQuery));
