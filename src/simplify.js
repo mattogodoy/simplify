@@ -5,7 +5,7 @@
      In Spain we keep sound /z/.
      */
     var defaults = {
-      spain: false
+      spain: false // @deprecated
     };
 
     options = $.extend(defaults, options);
@@ -33,8 +33,8 @@
         // Replace X with CS
         text = this.replaceAll('x', 'cs', text);
 
-        // Replace Ch with X
-        text = this.replaceAll('ch', 'x', text);
+        // Replace Ch with TS
+        text = this.replaceAll('ch', 'ts', text);
 
         // Replace K, Q with C
         text = this.replaceAll('k', 'c', text);
