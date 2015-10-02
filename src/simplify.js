@@ -1,24 +1,16 @@
 (function ($) {
 
-  $.fn.simplify = function (options) {
-    /*
-     In Spain we keep sound /z/.
-     */
-    var defaults = {
-      spain: false // @deprecated
-    };
-
-    options = $.extend(defaults, options);
-
+  $.fn.simplify = function () {
     var translator = {
       translate: function (text) {
-        text = text.toLowerCase();
-
         // Replace V with B
         text = this.replaceAll('v', 'b', text);
 
         // Replace Ce, Ci with Se, Si and accents
-        text = this.replaceAll('c([eiéí])', ((options.spain) ? 'z' : 's') + '$1', text);
+        text = this.replaceAll('c([eiéí])', 's' + '$1', text);
+
+        // Replace XC with CS
+        text = this.replaceAll('xc', 'cs', text);
 
         // Replace X with CS
         text = this.replaceAll('x', 'cs', text);
@@ -30,7 +22,7 @@
         text = this.replaceAll('k|qu|q', 'c', text);
 
         // Replace Gu with G
-        text = this.replaceAll('gu', 'g', text);
+        text = this.replaceAll('gu([eiéí])', 'g$1', text);
 
         // Replace Gü with Gu
         text = this.replaceAll('ü', 'u', text);
@@ -42,9 +34,7 @@
         text = this.replaceAll('ll', 'y', text);
 
         // Replace Z with S
-        if (!options.spain) {
-          text = this.replaceAll('z', 's', text);
-        }
+        text = this.replaceAll('z', 's', text);
 
         return text;
       },
