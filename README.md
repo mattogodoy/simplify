@@ -46,8 +46,3 @@ $('.original').simplify({spain: true});
 
 ## Demo
 http://matto.io/files/simplify/
-
-## Pendiente
-
-- Respetar mayúsculas / minúsculas (actualmente se convierte todo a minúsculas)
-- Agregar más idiomas
