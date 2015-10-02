@@ -9,7 +9,6 @@
     };
 
     options = $.extend(defaults, options);
-    console.log(options);
 
     var translator = {
       translate: function (text) {
@@ -22,27 +21,37 @@
         if (!options.spain) {
           text = this.replaceAll('ce', 'se', text);
           text = this.replaceAll('ci', 'si', text);
+          text = this.replaceAll('cé', 'sé', text);
+          text = this.replaceAll('cí', 'sí', text);
         } else {
           text = this.replaceAll('ce', 'ze', text);
           text = this.replaceAll('ci', 'zi', text);
+          text = this.replaceAll('cé', 'zé', text);
+          text = this.replaceAll('cí', 'zí', text);
         }
 
-        // Replace X with KS
-        text = this.replaceAll('x', 'ks', text);
+        // Replace X with CS
+        text = this.replaceAll('x', 'cs', text);
 
         // Replace Ch with X
         text = this.replaceAll('ch', 'x', text);
 
-        // Replace C, Q with K
-        text = this.replaceAll('c', 'k', text);
-        text = this.replaceAll('qu', 'k', text);
-        text = this.replaceAll('q', 'k', text);
+        // Replace K, Q with C
+        text = this.replaceAll('k', 'c', text);
+        text = this.replaceAll('qu', 'c', text);
+        text = this.replaceAll('q', 'c', text);
 
         // Replace Gu with G
         text = this.replaceAll('gu', 'g', text);
 
+        // Replace Gü with Gu
+        text = this.replaceAll('ü', 'u', text);
+
         // Remove H
         text = this.replaceAll('h', '', text);
+
+        // Replace LL with Y
+        text = this.replaceAll('ll', 'y', text);
 
         // Replace Z with S
         if (!options.spain) {
