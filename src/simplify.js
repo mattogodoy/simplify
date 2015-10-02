@@ -21,6 +21,9 @@
         // Replace K, Q with C
         text = this.replaceAll('k|qu|q', 'c', text);
 
+        // Replace Ge, Gi with J
+        text = this.replaceAll('g([ei])', 'j$1', text);
+
         // Replace Gu with G
         text = this.replaceAll('gu([eiéí])', 'g$1', text);
 

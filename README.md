@@ -21,6 +21,7 @@ Los reemplazos en el texto son:
 - El conjunto XC pasa a ser CS. Ejemplo: «ecsepto»
 - La X pasa a ser CS. Ejemplo: «tacsi»
 - Dado que la H ya no existe, el sonido de CH es reemplazado por la letra X. Ejemplo: «bixo»
+- La G antes de la E o la I, pasa a ser J. Ejemplo: «jiro»
 - El conjunto de Gu carece de sentido y deja de existir. Ahora la G suena igual independientemente de qué letra tenga a continuación. Ejemplo: «agila»
 - La Ü que sólo se usa luego de una G y antes de una E o una I es la más estúpida de todas las reglas. A partir de ahora desaparece. Ejemplo: «desague»
 - La LL desaparece dado que suena igual que Y. Mi maestra de lengua se arrancará los pelos, pero si se sincera, no hay diferencia alguna al hablarlo. Ejemplo: «yuvia»
