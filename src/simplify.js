@@ -19,24 +19,16 @@
         text = this.replaceAll('v', 'b', text);
 
         // Replace Ce, Ci with Se, Si
-        if (!options.spain) {
-          text = this.replaceAll('ce', 'se', text);
-          text = this.replaceAll('ci', 'si', text);
-        } else {
-          text = this.replaceAll('ce', 'ze', text);
-          text = this.replaceAll('ci', 'zi', text);
-        }
+        text = this.replaceAll('c([eiéí])', ((options.spain) ? 'z' : 's') + '$1', text);
 
         // Replace X with KS
         text = this.replaceAll('x', 'ks', text);
 
         // Replace Ch with TS
-        text = this.replaceAll('ch', 'ts', text);
+        text = this.replaceAll('ch', 'x', text);
 
-        // Replace C, Q with K
-        text = this.replaceAll('c', 'k', text);
-        text = this.replaceAll('qu', 'k', text);
-        text = this.replaceAll('q', 'k', text);
+        // Replace K, Q with C
+        text = this.replaceAll('k|qu|q', 'c', text);
 
         // Replace Gu with G
         text = this.replaceAll('gu', 'g', text);
