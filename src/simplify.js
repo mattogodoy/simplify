@@ -1,87 +1,61 @@
 (function ($) {
+  String.prototype.replaceAll = function (needle, replace) {
+    return this.replace(new RegExp(needle, 'gi'), replace);
+  };
+
+  var translate = function(source) {
+    return source
+      // Replace V with B
+      .replaceAll('v', 'b')
+
+      // Replace Ce, Ci with Se, Si and accents
+      .replaceAll('c([eiéí])', 's' + '$1')
+
+      // Replace XC with CS
+      .replaceAll('xc', 'cs')
+
+      // Replace X with CS
+      .replaceAll('x', 'cs')
+
+      // Replace Ch with X
+      .replaceAll('ch', 'x')
+
+      // Replace K, Q with C
+      .replaceAll('k|qu|q', 'c')
+
+      // Replace Ge, Gi with J
+      .replaceAll('g([ei])', 'j$1')
+
+      // Replace Gu with G
+      .replaceAll('gu([eiéí])', 'g$1')
+
+      // Replace Gü with Gu
+      .replaceAll('ü', 'u')
+
+      // Remove H
+      .replaceAll('h', '')
+
+      // Replace LL with Y
+      .replaceAll('ll', 'y')
+
+      // Replace Z with S
+      .replaceAll('z', 's');
+  };
 
   $.fn.simplify = function () {
-    var translator = {
-      translate: function (text) {
-        // Replace V with B
-        text = this.replaceAll('v', 'b', text);
+    this.each(function() {
+      var $this = $(this),
+        isValuable = !!$this.val(),
+        source = $this.val() || $this.text(),
+        result = translate(source);
 
-        // Replace Ce, Ci with Se, Si and accents
-        text = this.replaceAll('c([eiéí])', 's' + '$1', text);
-
-        // Replace XC with CS
-        text = this.replaceAll('xc', 'cs', text);
-
-        // Replace X with CS
-        text = this.replaceAll('x', 'cs', text);
-
-        // Replace Ch with X
-        text = this.replaceAll('ch', 'x', text);
-
-        // Replace K, Q with C
-        text = this.replaceAll('k|qu|q', 'c', text);
-
-        // Replace Ge, Gi with J
-        text = this.replaceAll('g([ei])', 'j$1', text);
-
-        // Replace Gu with G
-        text = this.replaceAll('gu([eiéí])', 'g$1', text);
-
-        // Replace Gü with Gu
-        text = this.replaceAll('ü', 'u', text);
-
-        // Remove H
-        text = this.replaceAll('h', '', text);
-
-        // Replace LL with Y
-        text = this.replaceAll('ll', 'y', text);
-
-        // Replace Z with S
-        text = this.replaceAll('z', 's', text);
-
-        return text;
-      },
-
-      replaceAll: function (find, replace, str) {
-        return str.replace(new RegExp(find, 'gi'), replace);
+      if (isValuable) {
+        $this.val(result);
+      } else {
+        $this.text(result);
       }
-    };
-
-    var text = '';
-    var property = '';
-    var translation;
-
-    if (this.val()) {
-      text = this.val();
-      property = 'val';
-    } else if (this.text()) {
-      text = this.text();
-      property = 'text';
-    } else if (this.html()) {
-      text = this.html();
-      property = 'html';
-    } else {
-      console.log("Error. Empty element.");
-      return false;
-    }
-
-    translation = translator.translate(text);
-
-    switch (property) {
-      case 'val':
-        this.val(translation);
-        break;
-
-      case 'text':
-        this.text(translation);
-        break;
-
-      case 'html':
-        this.html(translation);
-        break;
-    }
+    });
 
     return this;
   };
-
 }(jQuery));
