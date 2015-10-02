@@ -5,7 +5,7 @@
      In Spain we keep sound /z/.
      */
     var defaults = {
-      spain: false
+      spain: false // @deprecated
     };
 
     options = $.extend(defaults, options);
@@ -17,18 +17,8 @@
         // Replace V with B
         text = this.replaceAll('v', 'b', text);
 
-        // Replace Ce, Ci with Se, Si
-        if (!options.spain) {
-          text = this.replaceAll('ce', 'se', text);
-          text = this.replaceAll('ci', 'si', text);
-          text = this.replaceAll('cé', 'sé', text);
-          text = this.replaceAll('cí', 'sí', text);
-        } else {
-          text = this.replaceAll('ce', 'ze', text);
-          text = this.replaceAll('ci', 'zi', text);
-          text = this.replaceAll('cé', 'zé', text);
-          text = this.replaceAll('cí', 'zí', text);
-        }
+        // Replace Ce, Ci with Se, Si and accents
+        text = this.replaceAll('c([eiéí])', ((options.spain) ? 'z' : 's') + '$1', text);
 
         // Replace X with CS
         text = this.replaceAll('x', 'cs', text);
@@ -37,9 +27,7 @@
         text = this.replaceAll('ch', 'x', text);
 
         // Replace K, Q with C
-        text = this.replaceAll('k', 'c', text);
-        text = this.replaceAll('qu', 'c', text);
-        text = this.replaceAll('q', 'c', text);
+        text = this.replaceAll('k|qu|q', 'c', text);
 
         // Replace Gu with G
         text = this.replaceAll('gu', 'g', text);
@@ -62,7 +50,7 @@
       },
 
       replaceAll: function (find, replace, str) {
-        return str.replace(new RegExp(find, 'g'), replace);
+        return str.replace(new RegExp(find, 'gi'), replace);
       }
     };
 
