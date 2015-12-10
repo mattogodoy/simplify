@@ -1,97 +1,61 @@
 (function ($) {
+  String.prototype.replaceAll = function (needle, replace) {
+    return this.replace(new RegExp(needle, 'gi'), replace);
+  };
 
-  $.fn.simplify = function (options) {
-    /*
-     In Spain we keep sound /z/.
-     */
-    var defaults = {
-      spain: false
-    };
+  var translate = function(source) {
+    return source
+      // Replace V with B
+      .replaceAll('v', 'b')
 
-    options = $.extend(defaults, options);
-    console.log(options);
+      // Replace Ce, Ci with Se, Si and accents
+      .replaceAll('c([eiéí])', 's' + '$1')
 
-    var translator = {
-      translate: function (text) {
-        text = text.toLowerCase();
+      // Replace XC with CS
+      .replaceAll('xc', 'cs')
 
-        // Replace V with B
-        text = this.replaceAll('v', 'b', text);
+      // Replace X with CS
+      .replaceAll('x', 'cs')
 
-        // Replace Ce, Ci with Se, Si
-        if (!options.spain) {
-          text = this.replaceAll('ce', 'se', text);
-          text = this.replaceAll('ci', 'si', text);
-        } else {
-          text = this.replaceAll('ce', 'ze', text);
-          text = this.replaceAll('ci', 'zi', text);
-        }
+      // Replace Ch with X
+      .replaceAll('ch', 'x')
 
-        // Replace X with KS
-        text = this.replaceAll('x', 'ks', text);
+      // Replace K, Q with C
+      .replaceAll('k|qu|q', 'c')
 
-        // Replace Ch with X
-        text = this.replaceAll('ch', 'x', text);
+      // Replace Ge, Gi with J
+      .replaceAll('g([ei])', 'j$1')
 
-        // Replace C, Q with K
-        text = this.replaceAll('c', 'k', text);
-        text = this.replaceAll('qu', 'k', text);
-        text = this.replaceAll('q', 'k', text);
+      // Replace Gu with G
+      .replaceAll('gu([eiéí])', 'g$1')
 
-        // Replace Gu with G
-        text = this.replaceAll('gu', 'g', text);
+      // Replace Gü with Gu
+      .replaceAll('ü', 'u')
 
-        // Remove H
-        text = this.replaceAll('h', '', text);
+      // Remove H
+      .replaceAll('h', '')
 
-        // Replace Z with S
-        if (!options.spain) {
-          text = this.replaceAll('z', 's', text);
-        }
+      // Replace LL with Y
+      .replaceAll('ll', 'y')
 
-        return text;
-      },
+      // Replace Z with S
+      .replaceAll('z', 's');
+  };
 
-      replaceAll: function (find, replace, str) {
-        return str.replace(new RegExp(find, 'g'), replace);
+  $.fn.simplify = function () {
+    this.each(function() {
+      var $this = $(this),
+        isValuable = !!$this.val(),
+        source = $this.val() || $this.text(),
+        result = translate(source);
+
+      if (isValuable) {
+        $this.val(result);
+      } else {
+        $this.text(result);
       }
-    };
-
-    var text = '';
-    var property = '';
-    var translation;
-
-    if (this.val()) {
-      text = this.val();
-      property = 'val';
-    } else if (this.text()) {
-      text = this.text();
-      property = 'text';
-    } else if (this.html()) {
-      text = this.html();
-      property = 'html';
-    } else {
-      console.log("Error. Empty element.");
-      return false;
-    }
-
-    translation = translator.translate(text);
-
-    switch (property) {
-      case 'val':
-        this.val(translation);
-        break;
-
-      case 'text':
-        this.text(translation);
-        break;
-
-      case 'html':
-        this.html(translation);
-        break;
-    }
+    });
 
     return this;
   };
-
 }(jQuery));
