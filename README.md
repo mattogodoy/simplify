@@ -39,5 +39,20 @@ $('.original').simplify();
 
 Donde «.original» puede ser cualquier selector jQuery que apunte a un nodo que contenga texto.
 
-## Demo
-http://matto.io/files/simplify/
+## Ejemplo
+
+Tomando como ejemplo el siguiente texto:
+
+```
+La evolución del lenguaje es el campo de la lingüística que trata sobre cómo emergió y evolucionó el lenguaje actual en la línea evolutiva del ser humano. Casi todas las palabras que hoy usamos provienen de formas distintas que ya usaron nuestros antepasados y que, surgiendo por numerosas causas, procesos y factores, fueron evolucionando hacia los estados en los que hoy las conocemos y utilizamos. La mayoría de esos factores que inciden en la evolución de las lenguas responden, curiosamente, a cuestiones extralingüísticas, tales como factores socioculturales, políticos, históricos y geográficos en el espacio.
+```
+
+Una vez simplificado quedaría de la siguiente manera:
+
+```
+La ebolusión del lenguaje es el campo de la linguística ce trata sobre cómo emerjió y ebolusionó el lenguaje actual en la línea ebolutiba del ser umano. Casi todas las palabras ce oy usamos probienen de formas distintas ce ya usaron nuestros antepasados y ce, surjiendo por numerosas causas, prosesos y factores, fueron ebolusionando asia los estados en los ce oy las conosemos y utilisamos. La mayoría de esos factores ce insiden en la ebolusión de las lenguas responden, curiosamente, a cuestiones ecstralinguísticas, tales como factores sosioculturales, políticos, istóricos y jeográficos en el espasio.
+```
+
+## Pruébalo tu mismo
+
+https://mattogodoy.github.io/simplify/
